@@ -19,7 +19,7 @@ describe HangpersonGame do
     end
   end
 
-  describe 'guessing', :pending => true do
+  describe 'guessing' do
     context 'correctly' do
       before :each do
         @game = HangpersonGame.new('garply')
