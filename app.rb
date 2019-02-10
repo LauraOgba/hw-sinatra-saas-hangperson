@@ -32,6 +32,7 @@ class HangpersonApp < Sinatra::Base
     # NOTE: don't change previous line - it's needed by autograder!
 
     @game = HangpersonGame.new(word)
+    "Goodbye World"
     redirect '/show'
   end
   
