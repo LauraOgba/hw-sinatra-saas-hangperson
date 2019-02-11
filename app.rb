@@ -26,9 +26,7 @@ class HangpersonApp < Sinatra::Base
     erb :new
   end
 
-post '/new' do
-  "Hello World"
-end
+
 
   post '/create' do
     # NOTE: don't change next line - it's needed by autograder!
@@ -39,9 +37,7 @@ end
     redirect '/show'
   end
   
-  # Use existing methods in HangpersonGame to process a guess.
-  # If a guess is repeated, set flash[:message] to "You have already used that letter."
-  # If a guess is invalid, set flash[:message] to "Invalid guess."
+ 
   post '/guess' do
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
@@ -57,30 +53,24 @@ end
     redirect '/show'
   end
   
-  # Everytime a guess is made, we should eventually end up at this route.
-  # Use existing methods in HangpersonGame to check if player has
-  # won, lost, or neither, and take the appropriate action.
-  # Notice that the show.erb template expects to use the instance variables
-  # wrong_guesses and word_with_guesses from @game.
-  get '/show' do
-    ### YOUR CODE HERE ###
-     if @game.check_win_or_lose == :win then redirect '/win'
-    elsif @game.check_win_or_lose == :lose then redirect '/lose'
+ get '/show' do
+    win_or_lose = @game.check_win_or_lose
+    
+    redirect '/win'if win_or_lose == :win
+    redirect '/lose'if win_or_lose == :lose
     erb :show # You may change/remove this line
   end
   
   get '/win' do
-    ### YOUR CODE HERE ###
-     redirect '/show' if not @game.check_win_or_lose == :win
+    # If the user tries to access the /win page, he/she is redirected to the /show page
+    redirect '/show' if not @game.check_win_or_lose == :win
     erb :win # You may change/remove this line
   end
   
   get '/lose' do
-    ### YOUR CODE HERE ###
-     redirect '/show' if not @game.check_win_or_lose == :lose
+    # If the user tries to access the /lose page, he/she is redirected to the /show page
+    redirect '/show' if not @game.check_win_or_lose == :lose
     erb :lose # You may change/remove this line
   end
-  
-end 
 end
 
